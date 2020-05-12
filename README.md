@@ -1,1 +1,2 @@
-# ruby_cource
+# thinknetica
+задания по курсу основы Ruby
