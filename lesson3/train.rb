@@ -1,44 +1,5 @@
 # frozen_string_literal: true
 
-class Station
-  attr_reader :train_list
-
-  def initialize(name)
-    @name = name
-    @train_list = []
-  end
-
-  def add_train(name)
-    train_list << name
-  end
-
-  def send_a_train(name)
-    train_list.delete(name)
-  end
-
-  def train_type(type)
-    train_list.select { |train| train.type == type }
-  end
-end
-
-class Route
-  attr_reader :way
-
-  def initialize(first_station, last_station)
-    @way = []
-    @way << first_station
-    @way << last_station
-  end
-
-  def add_station(name)
-    way.insert(-2, name)
-  end
-
-  def delete_station(name)
-    way.delete(name)
-  end
-end
-
 class Train
   attr_reader :number, :type, :wagons, :speed, :current_station
 
@@ -62,7 +23,7 @@ class Train
   end
 
   def delete_wagons
-    @wagons -= 1 if speed == 0
+    @wagons -= 1 if speed.zero? && wagons > 0
   end
 
   def train_way(route)
@@ -78,5 +39,19 @@ class Train
 
   def previous_station
     @route.way[@index - 1]
+  end
+
+  def go
+    puts 'Приехали' if current_station == route.way.last
+    current_station.delete_station(self)
+    next_station.add_station(self)
+    @index += 1
+  end
+
+  def back
+    puts 'Приехали' if current_station == route.way.first
+    current_station.delete_station(self)
+    previous_station.add_station(self)
+    @index -= 1
   end
 end
