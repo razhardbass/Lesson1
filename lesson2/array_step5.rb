@@ -1,1 +1,3 @@
-puts (10..100).step(5).to_a
+# frozen_string_literal: true
+
+puts(10..100).step(5).to_a
