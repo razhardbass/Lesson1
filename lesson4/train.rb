@@ -18,6 +18,7 @@ class Train
   end
 
   def add_wagons(wagon)
+    return unless self.type == wagon.type
     @wagons << wagon if speed.zero?
   end
 
@@ -57,5 +58,9 @@ class Train
     current_station.send_a_train(self)
     previous_station.add_train(self)
     @index -= 1
+  end
+
+  def to_s
+    @number
   end
 end

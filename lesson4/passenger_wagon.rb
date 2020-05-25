@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-class CargoWagon
+class PassengerWagon
   attr_reader :type
   def initialize
-    type = 'cargo'
+    @type = 'passenger'
+  end
+
+  def to_s
+    @type
   end
 end

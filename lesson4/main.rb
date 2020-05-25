@@ -3,10 +3,10 @@
 require_relative 'route.rb'
 require_relative 'station.rb'
 require_relative 'train.rb'
-require_relative 'train_cargo.rb'
-require_relative 'train_pass.rb'
-require_relative 'wagon_cargo.rb'
-require_relative 'wagon_pass.rb'
+require_relative 'cargo_train.rb'
+require_relative 'passenger_train.rb'
+require_relative 'cargo_wagon.rb'
+require_relative 'passenger_wagon.rb'
 
 class RailRoad
   attr_reader :stations
@@ -112,9 +112,10 @@ class RailRoad
   end
 
   def create_new_route
-    puts 'Введите первую и последню станцию маршрута'
+    puts 'Введите первую станцию маршрута'
     show_array(@stations)
     first = choose_from_array(@stations)
+    puts 'Введите последнюю станцию маршрута'
     last = choose_from_array(@stations)
     @routes << Route.new(first, last)
     puts 'Ваши маршруты :'
@@ -165,13 +166,7 @@ class RailRoad
     puts 'Выберите поезд к которому добавить вагон'
     show_array(@trains)
     train = choose_from_array(@trains)
-    if train.type == 'passenger'
-      wagon = PassWagon.new
-      train.add_wagons(wagon)
-    else
-      wagon = CargoWagon.new
-      train.add_wagons(wagon)
-    end
+    train.type == 'passenger' ? train.add_wagons(PassengerWagon.new) : train.add_wagons(CargoWagon.new)
     puts "Список вагонов у поезда : #{train.wagons}"
     puts COMPLITION
   end

@@ -6,6 +6,6 @@ class PassengerTrain < Train
   end
 
   def type
-    type = 'passenger'
+    @type = 'passenger'
   end
 end

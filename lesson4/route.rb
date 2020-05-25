@@ -15,4 +15,8 @@ class Route
 
     way.delete(name)
   end
+
+  def to_s
+    @way.join("-")
+  end
 end
