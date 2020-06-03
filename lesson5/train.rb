@@ -74,4 +74,5 @@ class Train
   def to_s
     @number
   end
+
 end
