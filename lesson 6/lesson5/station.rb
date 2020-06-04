@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'instance_counter.rb'
 require_relative 'validation.rb'
 
@@ -7,7 +8,7 @@ class Station
   include Validation
   attr_reader :train_list, :name
 
-  NAME_FORMAT = /^\w+$/i
+  NAME_FORMAT = /^\w+$/i.freeze
 
   def initialize(name)
     @name = name
@@ -15,7 +16,7 @@ class Station
     validate!
     register_instance
   end
-  
+
   def self.all
     @train_list
   end

@@ -57,7 +57,7 @@ class RailRoad
       train_movement
     when 8
       show_station
-    else 
+    else
       puts 'Не корректный ввод, введите число от 1 до 8'
     end
   end
@@ -68,9 +68,9 @@ class RailRoad
     @stations << Station.new(name)
     puts 'Cозданные станции :'
     show_array(@stations)
-    rescue => e
-      puts e.message
-      retry
+  rescue StandardError => e
+    puts e.message
+    retry
   end
 
   def create_new_train
@@ -79,15 +79,15 @@ class RailRoad
     puts 'Если поезд пассажирский нажмите 1, если грузовой 2'
     case gets.to_i
     when 1
-      @trains << PassengerTrain.new(number) 
+      @trains << PassengerTrain.new(number)
     when 2
       @trains << CargoTrain.new(number)
     end
     puts 'Созданные поезда :'
     show_array(@trains)
-    rescue => e
-      puts e.message
-      retry
+  rescue StandardError => e
+    puts e.message
+    retry
   end
 
   def route_options
@@ -126,12 +126,13 @@ class RailRoad
     puts 'Введите последнюю станцию маршрута'
     last = choose_from_array(@stations)
     return if first.nil? || last.nil?
+
     @routes << Route.new(first, last)
     puts 'Ваши маршруты :'
     show_array(@routes)
-    rescue => e
-      puts e.message
-      retry
+  rescue StandardError => e
+    puts e.message
+    retry
   end
 
   def add_station_to_route
@@ -139,6 +140,7 @@ class RailRoad
     show_array(@routes)
     route = choose_from_array(@routes)
     return if route.nil?
+
     puts 'Выберите станцию по номеру'
     show_array(@stations)
     name = choose_from_array(@stations)
@@ -152,6 +154,7 @@ class RailRoad
     show_array(@routes)
     route = choose_from_array(@routes)
     return if route.nil?
+
     puts 'Выбирите станцию по номеру'
     show_array(@stations)
     name = choose_from_array(@stations)
@@ -166,10 +169,12 @@ class RailRoad
     show_array(@trains)
     train = choose_from_array(@trains)
     return if train.nil?
+
     puts 'Выбирите маршрут:'
     show_array(@routes)
     route = choose_from_array(@routes)
     return if route.nil?
+
     train.train_way(route)
     puts 'Текущий маршрут:'
     show_array(route.way)
@@ -181,6 +186,7 @@ class RailRoad
     show_array(@trains)
     train = choose_from_array(@trains)
     return if train.nil?
+
     train.type == 'passenger' ? train.add_wagons(PassengerWagon.new) : train.add_wagons(CargoWagon.new)
     puts "Список вагонов у поезда : #{train.wagons}"
     puts COMPLITION
@@ -191,6 +197,7 @@ class RailRoad
     show_array(@trains)
     train = choose_from_array(@trains)
     return if train.nil?
+
     train.delete_wagons
     puts "Список вагонов у поезда : #{train.wagons}"
     puts COMPLITION
@@ -202,6 +209,7 @@ class RailRoad
     train = choose_from_array(@trains)
     return if train.nil?
     return if @routes.empty?
+
     puts 'Нажмите 1, если хотите отправить поезд вперед'
     puts 'Нажмите 2, если хотите отправить поезд назад'
     case gets.to_i
@@ -219,6 +227,7 @@ class RailRoad
     show_array(@stations)
     station = choose_from_array(@stations)
     return if station.nil?
+
     puts 'Поезда на станции:'
     show_array(station.train_list)
     puts COMPLITION
@@ -226,7 +235,7 @@ class RailRoad
 
   def show_array(array)
     array.each_with_index do |element, index|
-    puts "#{index + 1}) #{element}"
+      puts "#{index + 1}) #{element}"
     end
   end
 
@@ -236,7 +245,6 @@ class RailRoad
 
     array[index - 1]
   end
-
 end
 
 RailRoad.new.start_programm

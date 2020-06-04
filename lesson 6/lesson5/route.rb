@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'instance_counter.rb'
 
 class Route
@@ -21,11 +22,11 @@ class Route
   end
 
   def to_s
-    @way.join("-")
+    @way.join('-')
   end
 
   def validate!
     raise 'Маршрут не может состять из 1 станции' if way.first == way.last
-    raise 'Нет созданных станций, сначала создайте станцию!'if way.empty? 
+    raise 'Нет созданных станций, сначала создайте станцию!' if way.empty?
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'company_name.rb'
 require_relative 'instance_counter.rb'
 require_relative 'validation.rb'
@@ -9,7 +10,7 @@ class Train
   include Validation
   attr_reader :number, :speed, :wagons
 
-  NUMBER_FORMAT = /^[a-z0-9]{3}-*[a-z0-9]{2}$/i
+  NUMBER_FORMAT = /^[a-z0-9]{3}-*[a-z0-9]{2}$/i.freeze
 
   def initialize(number)
     @number = number
@@ -20,8 +21,8 @@ class Train
   end
 
   def self.find(number)
-    @trains.each do |element| 
-      puts "#{element}" if element == number.to_i
+    @trains.each do |element|
+      puts element.to_s if element == number.to_i
     end
   end
 
@@ -34,7 +35,8 @@ class Train
   end
 
   def add_wagons(wagon)
-    return unless self.type == wagon.type
+    return unless type == wagon.type
+
     @wagons << wagon if speed.zero?
   end
 
@@ -83,7 +85,8 @@ class Train
   protected
 
   def validate!
-    raise 'Неверный формат номера, необходимо 5 цифр или латинских букв' unless number =~ NUMBER_FORMAT
+    unless number =~ NUMBER_FORMAT
+      raise 'Неверный формат номера, необходимо 5 цифр или латинских букв'
+    end
   end
-
 end
