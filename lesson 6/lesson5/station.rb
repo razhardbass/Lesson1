@@ -9,6 +9,7 @@ class Station
   attr_reader :train_list, :name
 
   NAME_FORMAT = /^\w+$/i.freeze
+  TEXT_ERROR = 'Неверный формат имени'
 
   def initialize(name)
     @name = name
@@ -38,6 +39,6 @@ class Station
   end
 
   def validate!
-    raise 'Неверный формат имени' unless name =~ NAME_FORMAT
+    raise TEXT_ERROR unless name =~ NAME_FORMAT
   end
 end
