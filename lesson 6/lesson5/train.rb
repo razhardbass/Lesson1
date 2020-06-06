@@ -11,7 +11,7 @@ class Train
   attr_reader :number, :speed, :wagons
 
   NUMBER_FORMAT = /^[a-z0-9]{3}-*[a-z0-9]{2}$/i.freeze
-  TEXT_ERROR = 'Неверный формат номера, необходимо 5 цифр или латинских букв'
+  NUMBER_ERROR = 'Неверный формат номера, необходимо 5 цифр или латинских букв'
 
   def initialize(number)
     @number = number
@@ -87,7 +87,7 @@ class Train
 
   def validate!
     unless number =~ NUMBER_FORMAT
-      raise TEXT_ERROR
+      raise NUMBER_ERROR
     end
   end
 end

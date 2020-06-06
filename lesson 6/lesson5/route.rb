@@ -6,8 +6,8 @@ class Route
   include InstanceCounter
   attr_reader :way
 
-  TEXT_ERROR_1 = 'Маршрут не может состять из 1 станции'
-  TEXT_ERROR_2 = 'Нет созданных станций, сначала создайте станцию!'
+  SAME_STATION_ERROR = 'Маршрут не может состять из 1 станции'
+  STATION_PRESENCE_ERROR = 'Нет созданных станций, сначала создайте станцию!'
 
   def initialize(first_station, last_station)
     @way = [first_station, last_station]
@@ -29,7 +29,7 @@ class Route
   end
 
   def validate!
-    raise TEXT_ERROR_1 if way.first == way.last
-    raise TEXT_ERROR_2 if way.empty?
+    raise SAME_STATION_ERROR if way.first == way.last
+    raise STATION_PRESENCE_ERROR if way.empty?
   end
 end
