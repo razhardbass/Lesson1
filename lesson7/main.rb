@@ -3,6 +3,7 @@
 require_relative 'route.rb'
 require_relative 'station.rb'
 require_relative 'train.rb'
+require_relative 'wagon.rb'
 require_relative 'cargo_train.rb'
 require_relative 'passenger_train.rb'
 require_relative 'cargo_wagon.rb'
@@ -231,12 +232,12 @@ class RailRoad
     return if wagon.nil?
 
     if wagon.type == 'passenger'
-      wagon.fill_a_place
+      wagon.fill
       puts train.wagons
     else
       puts 'Введите величину, на котору хотите заполнить объем'
       value = gets.to_i
-      wagon.fill_a_volume(value)
+      wagon.fill(value)
       puts train.wagons
     end
   rescue StandardError => e
