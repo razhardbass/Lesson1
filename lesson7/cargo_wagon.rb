@@ -1,10 +1,10 @@
 class CargoWagon < Wagon
-  def initialize(all)
+  def initialize(capacity)
     super
     @type = 'cargo'
   end
 
   def to_s
-    "#{@type} общий объем: #{@all}, свободно: #{free}, занято: #{@occupied}"
+    "#{@type} общий объем: #{@capacity}, свободно: #{free}, занято: #{@occupied_capacity}"
   end
 end

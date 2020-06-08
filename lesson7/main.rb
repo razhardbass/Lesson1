@@ -232,12 +232,12 @@ class RailRoad
     return if wagon.nil?
 
     if wagon.type == 'passenger'
-      wagon.fill
+      wagon.available_capacity
       puts train.wagons
     else
       puts 'Введите величину, на котору хотите заполнить объем'
       value = gets.to_i
-      wagon.fill(value)
+      wagon.available_capacity(value)
       puts train.wagons
     end
   rescue StandardError => e
