@@ -10,6 +10,8 @@ class Wagon
   NUMBER_ERROR = 'Введите положительное число'
   MAX_VALUE_ERROR = 'Вагон заполнен!'
 
+  validate :capacity, :type, Numeric
+
   def initialize(capacity)
     @capacity = capacity 
     @occupied_capacity = 0
@@ -25,9 +27,4 @@ class Wagon
   def free
     @capacity - @occupied_capacity
   end
-
-  def validate!
-    raise NUMBER_ERROR unless @capacity.positive?
-  end
-
 end

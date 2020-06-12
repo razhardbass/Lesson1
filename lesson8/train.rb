@@ -9,10 +9,14 @@ class Train
   include CompanyName
   include InstanceCounter
   include Validation
-  attr_accessor :number, :speed, :wagons
 
   NUMBER_FORMAT = /^[a-z0-9]{3}-*[a-z0-9]{2}$/i.freeze
-  NUMBER_ERROR = 'Неверный формат номера, необходимо 5 цифр или латинских букв'
+
+  attr_reader :number, :speed, :wagons
+
+  validate :number, :presence
+  validate :number, :type, String
+  validate :number, :format, NUMBER_FORMAT
 
   def initialize(number)
     @number = number
@@ -82,11 +86,5 @@ class Train
 
   def to_s
     @number
-  end
-
-  protected
-
-  def validate!
-    raise NUMBER_ERROR unless number =~ NUMBER_FORMAT
   end
 end
