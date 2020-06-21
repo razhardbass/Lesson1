@@ -16,6 +16,7 @@ module Validation
 
   module InstanceMethods
 
+    VALIDATION_ERROR = 'Неизвестный тип валидации'
     PRESENCE_ERROR = 'Значение не должно быть пустым или равным 0'
     FORMAT_ERROR = 'Неверный формат значения'
     TYPE_ERROR = 'Неверный тип значения'
@@ -44,7 +45,7 @@ module Validation
     def valid?
       validate!
       true
-    rescue StandardError
+    rescue StandardError, VALIDATION_ERROR
       false
     end
   end
